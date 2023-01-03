@@ -1,0 +1,15 @@
+steps:
+  - name: 'gcr.io/cloud-builders/mvn'
+    args: ['test','install']
+  - name: "gcr.io/$PROJECT_ID/sonar-scanner:latest" 
+    args: [ 
+      "-Dsonar.projectKey=test", 
+      "-Dsonar.sources=./src", 
+      "-Dsonar.host.url=http://34.93.224.149:9000", 
+      "-Dsonar.login=${_SONAR_TOKEN}",
+      "-Dsonar.java.binaries=.",
+      "-Dsonar.qualitygate.wait=true" ]
+substitutions:
+  _SONAR_TOKEN: "sqp_d4c23eedc6cd54930935fa3fc652a46110c0629b"
+
+
